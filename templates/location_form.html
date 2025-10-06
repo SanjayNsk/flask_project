@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="h3 mb-3">{{ 'Edit Location' if location else 'Add Location' }}</h1>
+
+<form method="post" class="card">
+  <div class="card-body">
+    {% if not location %}
+    <div class="mb-3">
+      <label for="location_id" class="form-label">Location ID</label>
+      <input type="text" id="location_id" name="location_id" class="form-control" placeholder="e.g. WH-X" required>
+    </div>
+    {% else %}
+    <div class="mb-3">
+      <label class="form-label">Location ID</label>
+      <input type="text" class="form-control" value="{{ location.location_id }}" disabled>
+      <div class="form-text">Location ID cannot be changed.</div>
+    </div>
+    {% endif %}
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" id="name" name="name" value="{{ location.name if location else '' }}" class="form-control" required>
+    </div>
+  </div>
+  <div class="card-footer d-flex justify-content-end gap-2">
+    <a href="{{ url_for('location_list') }}" class="btn btn-outline-secondary">Cancel</a>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
+</form>
+{% endblock %}

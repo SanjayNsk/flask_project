@@ -1,0 +1,10 @@
+body {
+  background: #f8f9fb;
+}
+.navbar-brand {
+  letter-spacing: 0.3px;
+}
+table td,
+table th {
+  vertical-align: middle;
+}

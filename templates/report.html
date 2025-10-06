@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="h3 mb-3">Balance by Product and Location</h1>
+
+<div class="card">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-striped align-middle m-0">
+        <thead>
+          <tr>
+            <th style="width: 200px;">Product</th>
+            <th style="width: 200px;">Warehouse</th>
+            <th style="width: 120px;">Qty</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in rows %}
+          <tr>
+            <td><code>{{ r.product_id }}</code></td>
+            <td><code>{{ r.location_id }}</code></td>
+            <td class="fw-semibold">{{ r.qty }}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="3" class="text-center text-muted py-4">No data to show. Add products, locations, and movements.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

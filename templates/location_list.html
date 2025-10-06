@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h1 class="h3 m-0">Locations</h1>
+  <a href="{{ url_for('location_new') }}" class="btn btn-success">Add Location</a>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-striped align-middle m-0">
+        <thead>
+          <tr>
+            <th style="width: 180px;">Location ID</th>
+            <th>Name</th>
+            <th style="width: 160px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for l in locations %}
+          <tr>
+            <td><code>{{ l.location_id }}</code></td>
+            <td>{{ l.name }}</td>
+            <td>
+              <a href="{{ url_for('location_edit', location_id=l.location_id) }}" class="btn btn-sm btn-primary">Edit</a>
+              <form class="d-inline" method="post" action="{{ url_for('location_delete', location_id=l.location_id) }}" onsubmit="return confirm('Delete this location?');">
+                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% else %}
+          <tr><td colspan="3" class="text-center text-muted py-4">No locations yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

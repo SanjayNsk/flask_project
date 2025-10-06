@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h1 class="h3 m-0">Product Movements</h1>
+  <a href="{{ url_for('movement_new') }}" class="btn btn-success">Add Movement</a>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-striped align-middle m-0">
+        <thead>
+          <tr>
+            <th style="width: 120px;">ID</th>
+            <th style="width: 220px;">Timestamp</th>
+            <th style="width: 150px;">Product</th>
+            <th style="width: 150px;">From</th>
+            <th style="width: 150px;">To</th>
+            <th style="width: 100px;">Qty</th>
+            <th style="width: 120px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for m in movements %}
+          <tr>
+            <td>{{ m.movement_id }}</td>
+            <td><span class="text-nowrap">{{ m.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</span></td>
+            <td><code>{{ m.product_id }}</code></td>
+            <td>{{ m.from_location if m.from_location else '—' }}</td>
+            <td>{{ m.to_location if m.to_location else '—' }}</td>
+            <td>{{ m.qty }}</td>
+            <td>
+              <a href="{{ url_for('movement_edit', movement_id=m.movement_id) }}" class="btn btn-sm btn-primary">Edit</a>
+            </td>
+          </tr>
+          {% else %}
+          <tr><td colspan="7" class="text-center text-muted py-4">No movements yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
